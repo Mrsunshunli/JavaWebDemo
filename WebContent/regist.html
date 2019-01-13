@@ -1,0 +1,119 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<link type="text/css" rel="stylesheet" href="./css/mp.css">
+<link type="text/css" rel="stylesheet" href="./css/examples.css">
+<script language="javascript">
+	//全局变量
+	var flag = 0;
+	function sub() {
+		//登录用户信息判断
+		if (document.getElementById("username").value != ""
+				&& document.getElementById("password").value != ""
+				&& document.getElementById("passwordAgain").value != "") {
+			if (flag >= 3) {
+                //验证成功，表单提交
+				document.regist.submit();
+			} else {
+				alert("请认真填写注册信息！");
+				document.getElementById("username").value = "";
+				document.getElementById("password").value = "";
+				document.getElementById("passwordAgain").value = "";
+				document.getElementById("usName").innerHTML = "";
+				document.getElementById("ps1").innerHTML = "";
+				document.getElementById("ps2").innerHTML = "";
+			}
+		}
+	}
+	function res() {
+		document.getElementById("username").value = "";
+		document.getElementById("password").value = "";
+		document.getElementById("passwordAgain").value = "";
+	}
+	function chang1(obj) {
+		var obValue = obj.value;
+		if (obValue.length > 8 || obValue.length < 3) {
+			document.getElementById("usName").innerHTML = "<font name=usName style='font-size:12px;color=red'>长度要求3~8位！</font>";
+			flag = 0;
+		} else {
+			document.getElementById("usName").innerHTML = "<font name=usName style='font-size:12px;color=green'>可以使用</font>";
+			flag++;
+		}
+	}
+	function chang2(obj) {
+		var obValue = obj.value;
+		if (obValue.length > 8 || obValue.length < 6) {
+			document.getElementById("ps1").innerHTML = "<font style='font-size:12px;color=red'>长度要求6~8位！</font>";
+			flag = 0;
+		} else {
+			document.getElementById("ps1").innerHTML = "<font style='font-size:12px;color=green'>可以使用</font>";
+			flag++;
+		}
+	}
+	function chang3(obj) {
+		var obValue = obj.value;
+		var prrValue = document.getElementById("password").value;
+		if (prrValue != obValue) {
+			document.getElementById("ps2").innerHTML = "<font style='font-size:12px;color=red'>请在此确认</font>";
+			flag = 0;
+		} else {
+			document.getElementById("ps2").innerHTML = "<font style='font-size:12px;color=green'>通过</font>";
+			flag++;
+		}
+	}
+</script>
+<title>网上购物系统</title>
+</head>
+<body>
+	<form method="POST" name="regist" action="RegistServlet">
+		<table style="height: 100%; width: 100%">
+			<tr align="center" valign="middle">
+				<td>
+					<TABLE width="392" height="200" border=0 align="center"
+						cellPadding=0 cellSpacing=0
+						style="background-image: url(./images/login_Page/logPage.jpg); height: 200; width: 392">
+						<TBODY>
+							<TR valign="middle" align="center">
+								<TD colSpan=3 height=40 valign="middle" align="center"><font
+									face="黑体" size="4px" color="#196ed1"
+									style="padding-left: 20px; vertical-align: middle">用户注册</font></TD>
+							</TR>
+							<TR>
+								<td width="80" height="20" class="login_td">&nbsp;&nbsp;&nbsp;用户名：</td>
+								<td width="120" height="20" class="login_td"><input
+									type="text" name="username" value="" style="WIDTH: 110px"
+									onChange="chang1(this)"></td>
+								<td id="usName"></td>
+							</tr>
+							<tr>
+								<td height="20" class="login_td">&nbsp;&nbsp;&nbsp;密 码：</td>
+								<td height="20" class="login_td"><input type="password"
+									name="password" value="" style="WIDTH: 110px"
+									onChange="chang2(this)"></td>
+								<td id="ps1"></td>
+							</tr>
+							<tr>
+								<td height="20" class="login_td">&nbsp;&nbsp;&nbsp;确认密码：</td>
+								<td height="20" class="login_td"><input type="password"
+									name="passwordAgain" value="" style="WIDTH: 110px"
+									onChange="chang3(this)"></td>
+								<td id="ps2"></td>
+							</tr>
+							<tr>
+								<td height="20" colspan="2" align="center">
+									<button class="login_button" onClick=res();>重置</button> &nbsp;
+									<button class="login_button" onClick=sub();>提交</button> &nbsp;
+								</td>
+								<td class="login_td" align="left" width=81><a
+									href="login.jsp">返回</a></td>
+
+							</TR>
+						</TBODY>
+					</TABLE>
+					</form>
+				</td>
+			</tr>
+		</table>
+</body>
+</html>
+
